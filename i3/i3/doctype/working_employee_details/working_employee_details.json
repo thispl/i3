@@ -1,0 +1,155 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-09-09 11:38:36.211542",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_code",
+  "employee_name",
+  "designation",
+  "duty_days",
+  "week_off_days",
+  "off_ot_days",
+  "ot_days",
+  "bot_days",
+  "total_days",
+  "working_days",
+  "working_day_calculate",
+  "salary_component_section",
+  "other_addition",
+  "advance",
+  "tds",
+  "canteen",
+  "column_break_16",
+  "overtime_amount",
+  "uniform",
+  "rent",
+  "other_deduction"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee_code",
+   "fieldtype": "Link",
+   "label": "Employee Code",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_code.employee_name",
+   "fetch_if_empty": 1,
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "duty_days",
+   "fieldtype": "Float",
+   "label": "Duty Days"
+  },
+  {
+   "fieldname": "week_off_days",
+   "fieldtype": "Float",
+   "label": "Off Days"
+  },
+  {
+   "fieldname": "off_ot_days",
+   "fieldtype": "Float",
+   "label": "Off OT Days"
+  },
+  {
+   "fieldname": "ot_days",
+   "fieldtype": "Float",
+   "label": "OT Days"
+  },
+  {
+   "fieldname": "bot_days",
+   "fieldtype": "Float",
+   "label": "BOT Days"
+  },
+  {
+   "fieldname": "total_days",
+   "fieldtype": "Read Only",
+   "label": "Total Days"
+  },
+  {
+   "fieldname": "working_days",
+   "fieldtype": "Data",
+   "label": "Working Days"
+  },
+  {
+   "default": "0",
+   "fieldname": "working_day_calculate",
+   "fieldtype": "Check",
+   "label": "Based On Working Days"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "salary_component_section",
+   "fieldtype": "Section Break",
+   "label": "Salary Component"
+  },
+  {
+   "fieldname": "advance",
+   "fieldtype": "Currency",
+   "label": "Advance"
+  },
+  {
+   "fieldname": "tds",
+   "fieldtype": "Currency",
+   "label": "TDS"
+  },
+  {
+   "fieldname": "canteen",
+   "fieldtype": "Currency",
+   "label": "Canteen"
+  },
+  {
+   "fieldname": "uniform",
+   "fieldtype": "Currency",
+   "label": "Uniform"
+  },
+  {
+   "fieldname": "rent",
+   "fieldtype": "Currency",
+   "label": "Rent"
+  },
+  {
+   "fieldname": "other_deduction",
+   "fieldtype": "Currency",
+   "label": "Other Deduction"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "other_addition",
+   "fieldtype": "Currency",
+   "label": "Other Addition"
+  },
+  {
+   "fieldname": "overtime_amount",
+   "fieldtype": "Currency",
+   "label": "Overtime Amount"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-11-14 12:09:05.561577",
+ "modified_by": "Administrator",
+ "module": "I3",
+ "name": "Working Employee Details",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

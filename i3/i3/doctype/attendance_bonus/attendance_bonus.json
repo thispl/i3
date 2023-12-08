@@ -1,0 +1,151 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-09-04 15:16:49.861805",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "basic",
+  "attendance_bonus_yearly_once",
+  "from_date",
+  "amount_based_on_percentage",
+  "actual_amount_baed_on_percentage",
+  "actual_amount",
+  "column_break_2",
+  "customer",
+  "hra",
+  "attendance_bonus_monthly_once",
+  "to_date",
+  "amount",
+  "actual_amount_based_on_amount",
+  "column_break_4",
+  "designation",
+  "bonus_process",
+  "hr_setting"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "basic",
+   "fieldtype": "Currency",
+   "label": "Basic"
+  },
+  {
+   "fieldname": "hra",
+   "fieldtype": "Currency",
+   "label": "HRA"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "actual_amount_baed_on_percentage",
+   "fieldtype": "Check",
+   "label": "Actual amount Baed on Percentage"
+  },
+  {
+   "default": "0",
+   "fieldname": "actual_amount_based_on_amount",
+   "fieldtype": "Check",
+   "label": "Actual Amount Based on Amount"
+  },
+  {
+   "fieldname": "amount_based_on_percentage",
+   "fieldtype": "Currency",
+   "label": "Amount Based On Percentage"
+  },
+  {
+   "fieldname": "actual_amount",
+   "fieldtype": "Currency",
+   "label": "Actual Amount"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount"
+  },
+  {
+   "default": "0",
+   "fieldname": "attendance_bonus_yearly_once",
+   "fieldtype": "Check",
+   "label": "Attendance Bonus Yearly Once"
+  },
+  {
+   "default": "0",
+   "fieldname": "attendance_bonus_monthly_once",
+   "fieldtype": "Check",
+   "label": "Attendance Bonus Monthly Once"
+  },
+  {
+   "fetch_from": "hr_setting.bonus_process",
+   "fetch_if_empty": 1,
+   "fieldname": "bonus_process",
+   "fieldtype": "Percent",
+   "label": "Bonus Process"
+  },
+  {
+   "fieldname": "hr_setting",
+   "fieldtype": "Link",
+   "label": "HR Setting",
+   "options": "HR Settings Against Salary"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-09-04 18:09:35.717149",
+ "modified_by": "Administrator",
+ "module": "I3",
+ "name": "Attendance Bonus",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

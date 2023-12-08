@@ -1,0 +1,331 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:PS-{employee}-{customer}-{designation}-{from_date}",
+ "creation": "2023-08-24 17:09:24.130574",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "employee_name",
+  "designation",
+  "column_break_3",
+  "company",
+  "department",
+  "section_break_7",
+  "from_date",
+  "column_break_16",
+  "to_date",
+  "section_break_6",
+  "customer",
+  "customer_code",
+  "location",
+  "column_break_10",
+  "working_days",
+  "payment_days",
+  "ot_hours",
+  "section_break_21",
+  "earnings",
+  "basic",
+  "house_rent_allowance",
+  "special_allowance",
+  "dearness_allowance",
+  "conveyance_allowance",
+  "washing_allowance",
+  "overtime",
+  "other_addition",
+  "epf",
+  "eesi",
+  "column_break_27",
+  "deductions",
+  "other_deduction",
+  "dpf",
+  "desi",
+  "professional_tax",
+  "advance",
+  "tds",
+  "canteen",
+  "uniform",
+  "rent",
+  "column_break_42",
+  "total_amount_section",
+  "total_earnings",
+  "net_pay",
+  "column_break_30",
+  "total_deductions"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.company",
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer ",
+   "options": "Customer"
+  },
+  {
+   "fetch_from": "customer.customer_code",
+   "fieldname": "customer_code",
+   "fieldtype": "Data",
+   "label": "Customer Code",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer.location",
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Location",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_days",
+   "fieldtype": "Data",
+   "label": "Payment Days",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ot_hours",
+   "fieldtype": "Data",
+   "label": "OT Days",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break",
+   "label": "Payroll Period Details"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Designation",
+   "options": "Designation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_earnings",
+   "fieldtype": "Currency",
+   "label": "Total Earnings"
+  },
+  {
+   "fieldname": "net_pay",
+   "fieldtype": "Currency",
+   "label": "Net Pay"
+  },
+  {
+   "fieldname": "total_deductions",
+   "fieldtype": "Currency",
+   "label": "Total Deductions"
+  },
+  {
+   "fieldname": "section_break_21",
+   "fieldtype": "Section Break",
+   "label": "Amount"
+  },
+  {
+   "fieldname": "basic",
+   "fieldtype": "Currency",
+   "label": "Basic"
+  },
+  {
+   "fieldname": "house_rent_allowance",
+   "fieldtype": "Currency",
+   "label": "House Rent Allowance"
+  },
+  {
+   "fieldname": "special_allowance",
+   "fieldtype": "Currency",
+   "label": "Special Allowance"
+  },
+  {
+   "fieldname": "dearness_allowance",
+   "fieldtype": "Currency",
+   "label": "Dearness Allowance"
+  },
+  {
+   "fieldname": "conveyance_allowance",
+   "fieldtype": "Currency",
+   "label": "Conveyance Allowance"
+  },
+  {
+   "fieldname": "washing_allowance",
+   "fieldtype": "Currency",
+   "label": "Washing Allowance"
+  },
+  {
+   "fieldname": "overtime",
+   "fieldtype": "Currency",
+   "label": "Overtime"
+  },
+  {
+   "fieldname": "other_addition",
+   "fieldtype": "Currency",
+   "label": "Other Addition"
+  },
+  {
+   "fieldname": "total_amount_section",
+   "fieldtype": "Section Break",
+   "label": "Total Amount"
+  },
+  {
+   "fieldname": "column_break_30",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "column_break_27",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "other_deduction",
+   "fieldtype": "Currency",
+   "label": "Other Deduction"
+  },
+  {
+   "fieldname": "dpf",
+   "fieldtype": "Currency",
+   "label": "DPF"
+  },
+  {
+   "fieldname": "desi",
+   "fieldtype": "Currency",
+   "label": "DESI"
+  },
+  {
+   "fieldname": "epf",
+   "fieldtype": "Currency",
+   "label": "EPF"
+  },
+  {
+   "fieldname": "eesi",
+   "fieldtype": "Currency",
+   "label": "EESI"
+  },
+  {
+   "fieldname": "earnings",
+   "fieldtype": "Heading",
+   "label": "Earnings"
+  },
+  {
+   "fieldname": "professional_tax",
+   "fieldtype": "Currency",
+   "label": "Professional Tax"
+  },
+  {
+   "fieldname": "deductions",
+   "fieldtype": "Heading",
+   "label": "Deductions"
+  },
+  {
+   "fieldname": "advance",
+   "fieldtype": "Currency",
+   "label": "Advance"
+  },
+  {
+   "fieldname": "tds",
+   "fieldtype": "Currency",
+   "label": "TDS"
+  },
+  {
+   "fieldname": "canteen",
+   "fieldtype": "Currency",
+   "label": "Canteen"
+  },
+  {
+   "fieldname": "uniform",
+   "fieldtype": "Currency",
+   "label": "Uniform"
+  },
+  {
+   "fieldname": "rent",
+   "fieldtype": "Currency",
+   "label": "Rent"
+  },
+  {
+   "fieldname": "working_days",
+   "fieldtype": "Int",
+   "label": "Working Days"
+  },
+  {
+   "fieldname": "column_break_42",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "hide_toolbar": 1,
+ "links": [],
+ "modified": "2023-11-22 18:09:41.768484",
+ "modified_by": "Administrator",
+ "module": "I3",
+ "name": "Payslip",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

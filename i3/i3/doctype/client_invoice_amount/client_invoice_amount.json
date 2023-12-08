@@ -1,0 +1,293 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-08-17 11:30:37.590370",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "designation",
+  "split_amount",
+  "section_break_3",
+  "basic",
+  "hra",
+  "special_allowance",
+  "column_break_7",
+  "dearness_allowance",
+  "conveyance_allowance",
+  "washing_allowance",
+  "formula_section",
+  "epf1",
+  "condition_depend_on_salary_component",
+  "fixed_amount",
+  "amount_greater_than_fixed_amount",
+  "epf",
+  "eesi1",
+  "eesi_condition_depend_on_salary_component",
+  "eesi_fixed_amount",
+  "eesi_amount_greater_than_fixed_amount",
+  "eesi",
+  "column_break_18",
+  "dpf1",
+  "dpf_condition_depend_on_salary_component",
+  "dpf_fixed_amount",
+  "dpf_amount_greater_than_fixed_amount",
+  "dpf",
+  "desi1",
+  "desi_condition_depend_on_salary_component",
+  "desi_fixed_amount",
+  "desi_amount_greater_than_fixed_amount",
+  "desi",
+  "pt1",
+  "pt",
+  "ot_calculation_section",
+  "formula",
+  "sn_pf1",
+  "sn_pf",
+  "column_break_39"
+ ],
+ "fields": [
+  {
+   "description": "Test",
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Designation",
+   "options": "Designation"
+  },
+  {
+   "description": "field-name [ basic ] - Get Basic amount using this Fieldname",
+   "fieldname": "basic",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Basic"
+  },
+  {
+   "description": "field-name [ special_allowance ] - Get Special Allowance amount using this Fieldname",
+   "fieldname": "special_allowance",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Special Allowance"
+  },
+  {
+   "description": "field-name [ dearness_allowance ] - Get Dearness Allowance amount using this Fieldname",
+   "fieldname": "dearness_allowance",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Dearness Allowance"
+  },
+  {
+   "description": "field-name [ conveyance_allowance ] - Get Conveyance Allowance amount using this Fieldname",
+   "fieldname": "conveyance_allowance",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Conveyance Allowance"
+  },
+  {
+   "description": "field-name [ washing_allowance ] - Get Washing Allowance amount using this Fieldname",
+   "fieldname": "washing_allowance",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Washing Allowance"
+  },
+  {
+   "default": "0",
+   "fieldname": "split_amount",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Split Amount"
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "formula_section",
+   "fieldtype": "Section Break",
+   "label": "Formula"
+  },
+  {
+   "depends_on": "eval:doc.dpf1 == 1;",
+   "fieldname": "dpf",
+   "fieldtype": "Code",
+   "label": "DPF Amount Less than Fixed Amount "
+  },
+  {
+   "depends_on": "eval:doc.desi1 == 1;",
+   "fieldname": "desi",
+   "fieldtype": "Code",
+   "label": "DESI Amount Less than Fixed Amount "
+  },
+  {
+   "depends_on": "eval:doc.pt1 == 1;",
+   "fieldname": "pt",
+   "fieldtype": "Code",
+   "hidden": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "dpf1",
+   "fieldtype": "Check",
+   "label": "DPF"
+  },
+  {
+   "default": "0",
+   "fieldname": "desi1",
+   "fieldtype": "Check",
+   "label": "DESI"
+  },
+  {
+   "default": "0",
+   "fieldname": "pt1",
+   "fieldtype": "Check",
+   "label": "PT"
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "epf1",
+   "fieldtype": "Check",
+   "label": "EPF"
+  },
+  {
+   "depends_on": "eval:doc.epf1 == 1;",
+   "fieldname": "epf",
+   "fieldtype": "Code",
+   "label": "EPF Amount Less than Fixed Amount "
+  },
+  {
+   "default": "0",
+   "fieldname": "eesi1",
+   "fieldtype": "Check",
+   "label": "EESI"
+  },
+  {
+   "depends_on": "eval:doc.eesi1 == 1;",
+   "fieldname": "eesi",
+   "fieldtype": "Code",
+   "label": "EESI Amount Less than Fixed Amount "
+  },
+  {
+   "description": "field-name [ hra ] - Get HRA amount using this Fieldname",
+   "fieldname": "hra",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "HRA"
+  },
+  {
+   "depends_on": "eval:doc.epf1 == 1;",
+   "fieldname": "condition_depend_on_salary_component",
+   "fieldtype": "Code",
+   "label": "EPF Condition Depend On Salary Component"
+  },
+  {
+   "depends_on": "eval:doc.epf1 == 1;",
+   "fieldname": "fixed_amount",
+   "fieldtype": "Currency",
+   "label": "EPF Fixed Amount"
+  },
+  {
+   "depends_on": "eval:doc.epf1 == 1;",
+   "fieldname": "amount_greater_than_fixed_amount",
+   "fieldtype": "Code",
+   "label": "EPF Amount Greater than Fixed Amount "
+  },
+  {
+   "depends_on": "eval:doc.eesi1 == 1;",
+   "fieldname": "eesi_condition_depend_on_salary_component",
+   "fieldtype": "Code",
+   "label": "EESI Condition Depend On Salary Component"
+  },
+  {
+   "depends_on": "eval:doc.eesi1 == 1;",
+   "fieldname": "eesi_fixed_amount",
+   "fieldtype": "Currency",
+   "label": "EESI Fixed Amount"
+  },
+  {
+   "depends_on": "eval:doc.eesi1 == 1;",
+   "fieldname": "eesi_amount_greater_than_fixed_amount",
+   "fieldtype": "Code",
+   "label": "EESI Amount Greater than Fixed Amount "
+  },
+  {
+   "depends_on": "eval:doc.desi1 == 1;",
+   "fieldname": "dpf_condition_depend_on_salary_component",
+   "fieldtype": "Code",
+   "label": "DPF Condition Depend On Salary Component"
+  },
+  {
+   "depends_on": "eval:doc.desi1 == 1;",
+   "fieldname": "dpf_fixed_amount",
+   "fieldtype": "Currency",
+   "label": "DPF Fixed Amount"
+  },
+  {
+   "depends_on": "eval:doc.desi1 == 1;",
+   "fieldname": "dpf_amount_greater_than_fixed_amount",
+   "fieldtype": "Code",
+   "label": "DPF Amount Greater than Fixed Amount "
+  },
+  {
+   "depends_on": "eval:doc.desi1 == 1;",
+   "fieldname": "desi_condition_depend_on_salary_component",
+   "fieldtype": "Code",
+   "label": "DESI Condition Depend On Salary Component"
+  },
+  {
+   "depends_on": "eval:doc.desi1 == 1;",
+   "fieldname": "desi_fixed_amount",
+   "fieldtype": "Currency",
+   "label": "DESI Fixed Amount"
+  },
+  {
+   "depends_on": "eval:doc.desi1 == 1;",
+   "fieldname": "desi_amount_greater_than_fixed_amount",
+   "fieldtype": "Code",
+   "label": "DESI Amount Greater than Fixed Amount "
+  },
+  {
+   "fieldname": "ot_calculation_section",
+   "fieldtype": "Section Break",
+   "label": "OT Calculation"
+  },
+  {
+   "fieldname": "formula",
+   "fieldtype": "Heading",
+   "label": "Formula"
+  },
+  {
+   "default": "0",
+   "fieldname": "sn_pf1",
+   "fieldtype": "Check",
+   "label": "SN PF"
+  },
+  {
+   "depends_on": "eval:doc.sn_pf1 == 1;",
+   "fieldname": "sn_pf",
+   "fieldtype": "Code"
+  },
+  {
+   "fieldname": "column_break_39",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-11-22 17:52:24.693746",
+ "modified_by": "Administrator",
+ "module": "I3",
+ "name": "Client Invoice Amount",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

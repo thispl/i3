@@ -1,0 +1,64 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-08-30 16:16:47.196916",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "epf",
+  "eesi",
+  "dpf",
+  "desi",
+  "bonus_process"
+ ],
+ "fields": [
+  {
+   "fieldname": "epf",
+   "fieldtype": "Data",
+   "label": "EPF"
+  },
+  {
+   "fieldname": "eesi",
+   "fieldtype": "Data",
+   "label": "EESI"
+  },
+  {
+   "fieldname": "dpf",
+   "fieldtype": "Data",
+   "label": "DPF"
+  },
+  {
+   "fieldname": "desi",
+   "fieldtype": "Data",
+   "label": "DESI"
+  },
+  {
+   "fieldname": "bonus_process",
+   "fieldtype": "Data",
+   "label": "Bonus Process"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-09-04 15:38:12.466507",
+ "modified_by": "Administrator",
+ "module": "I3",
+ "name": "HR Settings Against Salary",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

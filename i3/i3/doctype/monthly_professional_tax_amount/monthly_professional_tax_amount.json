@@ -1,0 +1,59 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-11-14 17:09:31.547816",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "from_date",
+  "to_date",
+  "gross_pay1",
+  "gross_pay",
+  "pt_amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "label": "Customer"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To date"
+  },
+  {
+   "fieldname": "pt_amount",
+   "fieldtype": "Data",
+   "label": "PT Amount"
+  },
+  {
+   "fieldname": "gross_pay1",
+   "fieldtype": "Data",
+   "label": "Gross Pay"
+  },
+  {
+   "fieldname": "gross_pay",
+   "fieldtype": "Currency",
+   "label": "Overall Gross pay"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-11-15 18:31:18.133823",
+ "modified_by": "Administrator",
+ "module": "I3",
+ "name": "Monthly Professional tax Amount",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}
