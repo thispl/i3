@@ -24,7 +24,9 @@
   "column_break_10",
   "working_days",
   "payment_days",
+  "duty_days",
   "ot_hours",
+  "bot_days",
   "section_break_21",
   "earnings",
   "basic",
@@ -35,6 +37,8 @@
   "washing_allowance",
   "overtime",
   "other_addition",
+  "bonus",
+  "el_wages",
   "epf",
   "eesi",
   "column_break_27",
@@ -49,11 +53,19 @@
   "uniform",
   "rent",
   "column_break_42",
+  "ot_calculation",
+  "ot_amount",
+  "sn_pf",
+  "sn_esi",
   "total_amount_section",
   "total_earnings",
   "net_pay",
   "column_break_30",
-  "total_deductions"
+  "total_deductions",
+  "column_break_52",
+  "net_pay1",
+  "total_net_pay1_section",
+  "total_net_pay"
  ],
  "fields": [
   {
@@ -303,11 +315,70 @@
   {
    "fieldname": "column_break_42",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ot_calculation",
+   "fieldtype": "Heading",
+   "label": "OT Calculation"
+  },
+  {
+   "fieldname": "ot_amount",
+   "fieldtype": "Currency",
+   "label": "OT Amount"
+  },
+  {
+   "fieldname": "sn_pf",
+   "fieldtype": "Currency",
+   "label": "SN PF"
+  },
+  {
+   "fieldname": "sn_esi",
+   "fieldtype": "Currency",
+   "label": "SN ESI"
+  },
+  {
+   "fieldname": "column_break_52",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "net_pay1",
+   "fieldtype": "Currency",
+   "label": "SN Net Pay"
+  },
+  {
+   "fieldname": "total_net_pay1_section",
+   "fieldtype": "Section Break",
+   "label": "Total Net Pay"
+  },
+  {
+   "fieldname": "total_net_pay",
+   "fieldtype": "Currency"
+  },
+  {
+   "fieldname": "bonus",
+   "fieldtype": "Currency",
+   "label": "Bonus"
+  },
+  {
+   "fieldname": "el_wages",
+   "fieldtype": "Data",
+   "label": "EL Wages"
+  },
+  {
+   "fieldname": "duty_days",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Duty Days"
+  },
+  {
+   "fieldname": "bot_days",
+   "fieldtype": "Int",
+   "label": "BOT Days"
   }
  ],
  "hide_toolbar": 1,
  "links": [],
- "modified": "2023-11-22 18:09:41.768484",
+ "modified": "2023-12-28 15:57:12.345401",
  "modified_by": "Administrator",
  "module": "I3",
  "name": "Payslip",

@@ -9,6 +9,7 @@
  "field_order": [
   "employee",
   "employee_name",
+  "designation",
   "column_break_3",
   "company",
   "department",
@@ -45,11 +46,19 @@
   "canteen",
   "uniform",
   "rent",
+  "column_break_39",
+  "ot_amount",
+  "sn_pf",
+  "sn_esi",
   "total_amount_section",
   "total_earnings",
   "net_pay",
   "column_break_30",
-  "total_deductions"
+  "total_deductions",
+  "column_break_48",
+  "sn_net_pay",
+  "total_net_pay1",
+  "total_net_pay"
  ],
  "fields": [
   {
@@ -168,6 +177,7 @@
   {
    "fieldname": "overtime",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Overtime"
   },
   {
@@ -272,11 +282,54 @@
    "fieldname": "master_payroll_process",
    "fieldtype": "Button",
    "label": "Master Payroll Process"
+  },
+  {
+   "fieldname": "column_break_39",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ot_amount",
+   "fieldtype": "Currency",
+   "label": "OT Amount"
+  },
+  {
+   "fieldname": "sn_pf",
+   "fieldtype": "Currency",
+   "label": "SN PF"
+  },
+  {
+   "fieldname": "sn_esi",
+   "fieldtype": "Currency",
+   "label": "SN ESI"
+  },
+  {
+   "fieldname": "column_break_48",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sn_net_pay",
+   "fieldtype": "Currency",
+   "label": "SN Net Pay"
+  },
+  {
+   "fieldname": "total_net_pay",
+   "fieldtype": "Currency"
+  },
+  {
+   "fieldname": "total_net_pay1",
+   "fieldtype": "Section Break",
+   "label": "Total Net Pay"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "read_only": 1
   }
  ],
  "hide_toolbar": 1,
  "links": [],
- "modified": "2023-10-11 19:28:34.184590",
+ "modified": "2023-12-28 13:52:38.511482",
  "modified_by": "Administrator",
  "module": "I3",
  "name": "Salary Slips",

@@ -36,13 +36,18 @@ class SalarySlips(Document):
 		Net=0
 		PT=0 
 		Deduction=0
+		SNESI=0
 		Advance=0
 		TDS=0
 		Canteen=0
 		Uniform=0
 		Rent=0
+		Total=0
 		Payment=0
+		SNPF=0
 		OTDays=0
+		SNNET=0
+		OT_amt=0
 		cus = frappe.db.sql("""select * from `tabPayslip`""",as_dict=True)
 		for slip in cus:
 			if slip.get('employee') == self.employee :
@@ -72,9 +77,16 @@ class SalarySlips(Document):
 				TE += slip.get('total_earnings') or 0
 				Net += slip.get('net_pay') or 0
 				TD += slip.get('total_deductions') or 0
+				OT_amt+=slip.get('ot_amount') or 0
+				SNPF+=slip.get('sn_pf') or 0
+				SNESI+=slip.get('sn_esi') or 0
+				Total+=slip.get('total_net_pay') or 0
+				SNNET+=slip.get('net_pay1') or 0
+
 			self.from_date=slip.get('from_date')
 			self.to_date=slip.get('to_date')
 			self.working_days=slip.get('working_days')
+			self.designation=slip.get('designation')
 		self.payment_days=Payment
 		self.ot_hours=OTDays
 		self.basic=Basic
@@ -100,6 +112,11 @@ class SalarySlips(Document):
 		self.total_earnings=TE
 		self.net_pay=Net
 		self.total_deductions=TD
+		self.ot_amount=OT_amt
+		self.sn_pf=SNPF
+		self.sn_esi=SNESI
+		self.total_net_pay=Total
+		self.sn_net_pay=SNNET
 
 # @frappe.whitelist()
 # def get_end_date(start_date, frequency):

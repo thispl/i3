@@ -29,12 +29,17 @@ class PayrollProcess(Document):
         DESI = 0 
         total1=0
         TEE =0
+        HRA=0
         TDP=0
+        B=0
         TDE=0
         TE=0
         gross=0
         TD=0
         n=0
+        SA=0
+        CA=0
+        DA=0
         Gross=0
         NetPay=0
         PT=0 
@@ -46,10 +51,20 @@ class PayrollProcess(Document):
         Rent=0
         OT=0
         Working=0
+        OA=0
+        WA=0
+        Bonus=0
         overtime=0
+        TDS=0
+        EL=0
         cal=0
         SNPF=''
+        Uniform=0
         amt=0
+        OD=0
+        Advance=0
+        Canteen=0
+        Rent=0
         SNESI=''
         DESI=''
         DPF =''
@@ -102,7 +117,7 @@ class PayrollProcess(Document):
                     frappe.errprint(Days)
                     for k in val.client_invoice_amount:
                         basic=float(k.basic)
-                        hra=float(k.house_rent_allowance)
+                        hra=float(k.hra)
                         sa=float(k.special_allowance)
                         wa=float(k.washing_allowance)
                         fixed_amount=float(k.fixed_amount)
@@ -118,6 +133,8 @@ class PayrollProcess(Document):
                         CA  = float((ca/Working)*Days)or 0.0
                         OT  =float ((p.overtime_amount/cal)*Days)or 0
                         OA  = float(p.other_addition)or 0
+                        Bonus  =float ((k.bonus/Working)*Days)or 0.0
+                        EL  =float ((k.el_wages/Working)*Days)or 0.0
                         OD  = float(p.other_deduction) or 0
                         TDS = float(p.tds) or 0
                         Advance=float(p.advance) or 0
@@ -209,21 +226,6 @@ class PayrollProcess(Document):
                                 frappe.errprint("Formula is empty or not provided.")
 
                         
-                        
-                        if (k.pt1 == True):
-                            if(Gross >12500):
-                                PT1= 208
-                            elif(Gross >10000):
-                                PT1=171
-                            elif(Gross > 7500):
-                                PT1=115
-                                frappe.errprint(PT)
-                            elif(Gross > 5000):
-                                PT1=52.5
-                            elif(Gross > 3500):
-                                PT1=22.5
-                            else:
-                                PT1=0
                         total=0
                         ot=0
                         offot=0
@@ -243,6 +245,20 @@ class PayrollProcess(Document):
 
                         # Perform the calculation
                         Gross = float(round((B_float + HRA_float + DA_float + SA_float + CA_float + WA_float + OT_float + OD_float + result_float + EESI_float), 2))
+                        if(Gross >12500):
+                            PT= 208
+                        elif(Gross >10000):
+                            PT=171
+                        elif(Gross > 7500):
+                            PT=115
+                            frappe.errprint(PT)
+                        elif(Gross > 5000):
+                            PT=52.5
+                        elif(Gross > 3500):
+                            PT=22.5
+                        else:
+                            PT=0
+                        frappe.errprint(PT)
                         if k.dpf1==1:
                             formula = k.condition_depend_on_salary_component.strip().replace("\n", " ") if k.condition_depend_on_salary_component else None
                             frappe.errprint(formula)
@@ -340,9 +356,11 @@ class PayrollProcess(Document):
                             else:
                                 frappe.errprint("Formula is empty or not provided.")
                         for p in self.working_employee_details:
-                            offot=p.off_ot_days
-                            ot=p.ot_days
-                            tot=offot+ot
+                            if p.employee_code==p.employee_code:
+                                offot=p.off_ot_days
+                                ot=p.ot_days
+                                frappe.errprint(p.ot_days)
+                                tot=offot+ot
                         overtime=float(total1/cal*tot)
                         formula = k.sn_pf.strip().replace("\n", " ") if k.sn_pf else None
                         if formula:
@@ -365,22 +383,22 @@ class PayrollProcess(Document):
                         else:
                             frappe.errprint("Formula is empty or not provided.")
 
-                    if (Gross<=20):
-                        PT=0
-                    elif (Gross>=21000 and Gross<=30000):
-                        PT=135
-                    elif (Gross>=30001 and Gross<=45000):
-                        PT=315
-                    elif (Gross>45001 and Gross<=60000):
-                        PT=690
-                    elif (Gross>60001 and Gross<=75000):
-                        PT=1025
-                    elif (Gross>75001):
-                        PT=1250
+                    # if (Gross<=20):
+                    #     PT=0
+                    # elif (Gross>=21000 and Gross<=30000):
+                    #     PT=135
+                    # elif (Gross>=30001 and Gross<=45000):
+                    #     PT=315
+                    # elif (Gross>45001 and Gross<=60000):
+                    #     PT=690
+                    # elif (Gross>60001 and Gross<=75000):
+                    #     PT=1025
+                    # elif (Gross>75001):
+                    #     PT=1250
                 
                     # totalval=0
                     # m=0
-                    # v=frappe.get_all("Professional Tax",{'employee':p.employee_code},['*'])
+                    # v=frappe.new_doc("Professional Tax",)
                     # for b in v:
                     #     vt=frappe.get_doc("Professional Tax",b.name)
                     #     for amt in vt.professional_tax_amount:
@@ -480,7 +498,7 @@ class PayrollProcess(Document):
                     frappe.errprint(TD)
                     NetPay=round((Gross-TD),2) or 0
                     frappe.errprint(NetPay)
-                    if(self.customer == val.name and p.employee_code==p.employee_code ):
+                    if(self.customer == val.name and p.employee_code==p.employee_code and p.designation==p.designation):
                         form.basic=B
                         form.house_rent_allowance=HRA
                         form.special_allowance=SA
@@ -489,6 +507,9 @@ class PayrollProcess(Document):
                         form.washing_allowance=WA
                         form.overtime=OT
                         form.other_addition=OA
+                        form.bonus=Bonus
+                        form.el_wages=EL
+
                         form.epf=result
                         form.eesi=EESI
                         form.other_deduction=OD
@@ -509,8 +530,9 @@ class PayrollProcess(Document):
                         form.total_deductions= TD
                         form.net_pay=NetPay
                         form.working_days=Working
+                        form.duty_days=p.duty_days
                         
-                        form.professional_tax=PT1
+                        form.professional_tax=PT
                         form.total_net_pay=form.net_pay+form.net_pay1
             
                     form.save(ignore_permissions=True)
@@ -553,11 +575,14 @@ class PayrollProcess(Document):
                             todate=self.end_date
                             cal=float((date_diff(todate, fromdate))+1)
                             frappe.errprint(cal)
+                        if p.employee_code==p.employee_code:
+                            duty=p.duty_days
+
                     Days=float(p.total_days) or 0
                     frappe.errprint(Days)
                     for k in val.client_invoice_amount:
                         basic=float(k.basic)
-                        hra=float(k.house_rent_allowance)
+                        hra=float(k.hra)
                         sa=float(k.special_allowance)
                         wa=float(k.washing_allowance)
                         fixed_amount=float(k.fixed_amount)
@@ -571,6 +596,8 @@ class PayrollProcess(Document):
                         WA  = float((wa /Working)*Days)or 0.0
                         DA  = float((da /Working)*Days)or 0.0
                         CA  =float ((ca/Working)*Days)or 0.0
+                        Bonus  =float ((k.bonus/Working)*Days)or 0.0
+                        EL  =float ((k.el_wages/Working)*duty)or 0.0
                         OT  = float((p.overtime_amount/cal)*Days)or 0
                         OA  =float (p.other_addition)or 0
                         OD  = float(p.other_deduction) or 0
@@ -583,6 +610,7 @@ class PayrollProcess(Document):
                         
                         frappe.errprint(Gross)
                         basic = B
+                        bonus=Bonus
                         hra=HRA
                         special_allowance=SA
                         washing_allowance=WA
@@ -665,20 +693,7 @@ class PayrollProcess(Document):
 
 
                         
-                        if (k.pt1 == True):
-                            if(Gross >12500):
-                                PT1= 208
-                            elif(Gross >10000):
-                                PT1=171
-                            elif(Gross > 7500):
-                                PT1=115
-                                frappe.errprint(PT)
-                            elif(Gross > 5000):
-                                PT1=52.5
-                            elif(Gross > 3500):
-                                PT1=22.5
-                            else:
-                                PT1=0
+                        
                         total=0
                         ot=0
                         offot=0
@@ -692,42 +707,69 @@ class PayrollProcess(Document):
                         WA_float = float(WA) if WA else 0.0
                         OT_float = float(OT) if OT else 0.0
                         OD_float = float(OD) if OD else 0.0
+                        Bonus=float(Bonus) if Bonus else 0.0
+                        El=float(EL) if EL else 0.0
+
                         result_float = float(result) if result else 0.0
                         EESI_float = float(EESI) if EESI else 0.0
-                        Gross = float(round((B_float + HRA_float + DA_float + SA_float + CA_float + WA_float + OT_float + OD_float + result_float + EESI_float), 2))
+                        Gross = float(round((B_float + HRA_float + DA_float + SA_float + CA_float + WA_float + Bonus+EL+ OT_float + OD_float + result_float + EESI_float), 2))
+                        gross=Gross
+                        frappe.errprint(gross)
+                        frappe.errprint('naren')
 
-                        if k.dpf1==1:
-                            formula = k.condition_depend_on_salary_component.strip().replace("\n", " ") if k.condition_depend_on_salary_component else None
+                        if(Gross >12500):
+                            PT= 208
+                        elif(Gross >10000):
+                            PT=171
+                        elif(Gross > 7500):
+                            PT=115
+                            frappe.errprint(PT)
+                        elif(Gross > 5000):
+                            PT=52.5
+                        elif(Gross > 3500):
+                            PT=22.5
+                        else:
+                            PT=0
+                        if k.dpf1==True:
+                            frappe.errprint('naren')
+                            formula = k.dpf_condition_depend_on_salary_component.strip().replace("\n", " ") if k.dpf_condition_depend_on_salary_component else None
                             frappe.errprint(formula)
                             if formula:
                                 try:
-                                    formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance,'gross':gross} 
+                                    formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'gross':gross,'bonus':bonus,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance,'gross':gross} 
                                     DPF = eval(formula, formula_vars)
                                     frappe.errprint(result)
+                                    frappe.errprint(DPF)
+                                    frappe.errprint('naren')
                                 except Exception as e:
                                     frappe.errprint(f"Error evaluating formula: {str(e)}")
                             else:
                                 frappe.errprint("Formula is empty or not provided.")
-                            if DPF != '' and float(DPF) > float(k.fixed_amount):
-                                formula = k.amount_greater_than_fixed_amount.strip().replace("\n", " ") if k.amount_greater_than_fixed_amount else None
+                            if DPF != '' and float(DPF) > float(k.dpf_fixed_amount):
+                                formula = k.dpf_amount_greater_than_fixed_amount.strip().replace("\n", " ") if k.dpf_amount_greater_than_fixed_amount else None
                                 frappe.errprint(formula)
                                 if formula:
                                     try:
-                                        formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance,'fixed_amount':fixed_amount} or '0'
+                                        formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'gross':gross,'bonus':bonus,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance,'fixed_amount':fixed_amount} or '0'
                                         DPF = eval(formula, formula_vars)
                                         frappe.errprint(result)
+                                        frappe.errprint(DPF)
+                                        frappe.errprint('naren')
                                     except Exception as e:
                                         frappe.errprint(f"Error evaluating formula: {str(e)}")
                                 else:
                                     frappe.errprint("Formula is empty or not provided.")
+                            
                             else:	
                                 formula = k.dpf.strip().replace("\n", " ") if k.dpf else None
 
                                 if formula:
                                     try:
-                                        formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance}
+                                        formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'gross':gross,'bonus':bonus,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance}
                                         DPF = eval(formula, formula_vars) 
                                         frappe.errprint(DPF)
+                                        frappe.errprint(DPF)
+                                        frappe.errprint('naren')
                                     except Exception as e:
                                         frappe.errprint(f"Error evaluating formula: {str(e)}")
                                 else:
@@ -737,31 +779,32 @@ class PayrollProcess(Document):
 
                             if formula:
                                 try:
-                                    formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance}
+                                    formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'gross':gross,'bonus':bonus,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance}
                                     DPF = eval(formula, formula_vars) 
                                     frappe.errprint(DPF)
                                 except Exception as e:
                                     frappe.errprint(f"Error evaluating formula: {str(e)}")
                             else:
                                 frappe.errprint("Formula is empty or not provided.")
-                        if k.desi1==1:
-                            formula = k.condition_depend_on_salary_component.strip().replace("\n", " ") if k.condition_depend_on_salary_component else None
+                            
+                        if k.desi1==True:
+                            formula = k.desi_condition_depend_on_salary_component.strip().replace("\n", " ") if k.desi_condition_depend_on_salary_component else None
                             frappe.errprint(formula)
                             if formula:
                                 try:
-                                    formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance} 
+                                    formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'gross':gross,'bonus':bonus,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance} 
                                     DESI = eval(formula, formula_vars)
                                     frappe.errprint(result)
                                 except Exception as e:
                                     frappe.errprint(f"Error evaluating formula: {str(e)}")
                             else:
                                 frappe.errprint("Formula is empty or not provided.")
-                            if DESI != '' and float(DESI) > float(k.fixed_amount):
-                                formula = k.amount_greater_than_fixed_amount.strip().replace("\n", " ") if k.amount_greater_than_fixed_amount else None
+                            if DESI != '' and float(DESI) > float(k.desi_fixed_amount):
+                                formula = k.desi_amount_greater_than_fixed_amount.strip().replace("\n", " ") if k.desi_amount_greater_than_fixed_amount else None
                                 frappe.errprint(formula)
                                 if formula:
                                     try:
-                                        formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance,'fixed_amount':fixed_amount} or '0'
+                                        formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'gross':gross,'bonus':bonus,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance,'fixed_amount':fixed_amount} or '0'
                                         DESI = eval(formula, formula_vars)
                                         frappe.errprint(result)
                                     except Exception as e:
@@ -773,7 +816,7 @@ class PayrollProcess(Document):
 
                                 if formula:
                                     try:
-                                        formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance,}
+                                        formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'gross':gross,'bonus':bonus,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance,}
                                         DESI = eval(formula, formula_vars)
                                         frappe.errprint(DESI)
                                     except Exception as e:
@@ -785,7 +828,7 @@ class PayrollProcess(Document):
 
                             if formula:
                                 try:
-                                    formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance,}
+                                    formula_vars = {'basic': basic, 'hra': hra,'special_allowance':special_allowance,'gross':gross,'bonus':bonus,'dearness_allowance':dearness_allowance,'conveyance_allowance':conveyance_allowance,'washing_allowance':washing_allowance,}
                                     DESI = eval(formula, formula_vars)
                                     frappe.errprint(DESI)
                                 except Exception as e:
@@ -794,9 +837,10 @@ class PayrollProcess(Document):
                                 frappe.errprint("Formula is empty or not provided.")
                         
                         for p in self.working_employee_details:
-                            offot=p.off_ot_days
-                            ot=p.ot_days
-                            tot=offot+ot
+                            if p.employee_code == p.employee_code:
+                                offot=p.off_ot_days
+                                ot=p.ot_days
+                                tot=form.ot_hours
                             frappe.errprint(tot)
                             frappe.errprint(cal)
                             frappe.errprint(total1)
@@ -824,18 +868,18 @@ class PayrollProcess(Document):
                         else:
                             frappe.errprint("Formula is empty or not provided.")
 
-                        if (Gross<=20):
-                            PT=0
-                        elif (Gross>=21000 and Gross<=30000):
-                            PT=135
-                        elif (Gross>=30001 and Gross<=45000):
-                            PT=315
-                        elif (Gross>45001 and Gross<=60000):
-                            PT=690
-                        elif (Gross>60001 and Gross<=75000):
-                            PT=1025
-                        elif (Gross>75001):
-                            PT=1250
+                        # if (Gross<=20):
+                        #     PT=0
+                        # elif (Gross>=21000 and Gross<=30000):
+                        #     PT=135
+                        # elif (Gross>=30001 and Gross<=45000):
+                        #     PT=315
+                        # elif (Gross>45001 and Gross<=60000):
+                        #     PT=690
+                        # elif (Gross>60001 and Gross<=75000):
+                        #     PT=1025
+                        # elif (Gross>75001):
+                        #     PT=1250
                     
                         totalval=0
                         m=0
@@ -935,11 +979,11 @@ class PayrollProcess(Document):
 
                             
                         #     pt.save(ignore_permissions=True)
-                        TD = float(round((float(DPF) + float(DESI) + float(PT1) + float(Canteen) + float(Rent) + float(Advance) + float(Uniform) + float(TDS)), 2)) or 0
+                        TD = float(round((float(DPF) + float(DESI) + float(PT) + float(Canteen) + float(Rent) + float(Advance) + float(Uniform) + float(TDS)), 2)) or 0
                         frappe.errprint(TD)
                         NetPay=round((Gross-TD),2) or 0
                         frappe.errprint(NetPay)
-                        if(self.customer == val.name and p.employee_code==ad.employee):
+                        if(self.customer == val.name and p.employee_code == p.employee_code and k.designation == p.designation):
                             form.basic=B
                             form.house_rent_allowance=HRA
                             form.special_allowance=SA
@@ -948,6 +992,9 @@ class PayrollProcess(Document):
                             form.washing_allowance=WA
                             form.overtime=OT
                             form.other_addition=OA
+                            form.bonus=Bonus
+                            form.el_wages=EL
+
                             form.epf=result
                             form.eesi=EESI
                             form.other_deduction=OD
@@ -956,19 +1003,19 @@ class PayrollProcess(Document):
                             form.advance=p.advance
                             form.tds=p.tds
                             form.uniform=p.uniform
-                            form.ot_amount = overtime
-                            form.sn_pf = SNPF 
-                            form.sn_esi = SNESI 
+                            form.ot_amount = float(overtime)
+                            form.sn_pf = float(SNPF) if SNPF else 0.0
+                            form.sn_esi = float(SNESI) if SNESI else 0.0
 
-                            form.net_pay1 =form.ot_amount-form.sn_pf - form.sn_esi 
-                            form.canteen=p.canteen
+                            form.net_pay1 =form.ot_amount - form.sn_pf - form.sn_esi 
+                            form.canteen=float(Canteen) 
                             form.rent=p.rent
                             form.total_earnings = Gross
                             form.total_deductions= TD
                             form.net_pay=NetPay
                             form.working_days=Working
-                            
-                            form.professional_tax=PT1
+                            form.duty_days=p.duty_days
+                            form.professional_tax=PT
                             form.total_net_pay=form.net_pay+form.net_pay1
                 
                     form.save(ignore_permissions=True)
